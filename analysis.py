@@ -25,4 +25,26 @@ def filter(state, column):
   return filtered_column
 
 #Example test
-print(len(filter("NEW_YORK", "AVG_MATH_4_SCORE")))
+years = []
+for row in avg_score:
+  years.append(row["YEAR"])
+print(years)
+
+def percent_change(data,year1,year2,column):
+  old = 0
+  new = 0
+  for row in data: 
+    if row["YEAR"] == year1:
+      old = float(row[column])
+    if row["YEAR"] == year2:
+      new = float(row[column])
+  perc_change = (old - new)/old * 100
+  return perc_change
+  
+for i in range(len(years)):
+  if i + 1 >=len(years):
+    break
+  year1 = years[i]
+  year2 = years[i+1]
+  change = percent_change(avg_score,year1,year2,"AVG_MATH_8_SCORE")
+  print(f"Percent cahnge from {year1}-{year2} is {change}")
